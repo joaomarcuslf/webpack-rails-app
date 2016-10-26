@@ -1,0 +1,17 @@
+{
+  "name": "todo-app",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app/assets/frontend/app.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "author": "João Marcus Fernandes",
+  "license": "MIT"
+}
