@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::ItemsController, type: :controller do
+RSpec.describe Api::V1::TodoItemsController, type: :controller do
   describe "GET index" do
     it "should display an array" do
       FactoryGirl.create_list(:todo_item, 10)
