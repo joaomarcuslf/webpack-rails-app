@@ -12,6 +12,13 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   },
+  "scripts": {
+    "test": "rspec",
+    "start": "npm install && bundle install && bundle exec rake db:create && bundle exec rake db:migrate",
+    "pre-dev": "npm install && bundle install && bundle exec rake db:migrate",
+    "dev": "bundle exec foreman start",
+    "bundle": "webpack"
+  },
   "author": "João Marcus Fernandes",
   "license": "MIT"
 }
