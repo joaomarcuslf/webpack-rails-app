@@ -1,4 +1,7 @@
+/* @flow */
 import React from 'react';
+import Header from './Header/Header.jsx';
+import Body from './Body/Body.jsx';
 
 export default class App extends React.Component {
   constructor() {
@@ -7,7 +10,10 @@ export default class App extends React.Component {
 
   render() {
     return(
-      <h1>Hello, world!</h1>
+      <div>
+        <Header />
+        <Body />
+      </div>
     );
   }
 }
