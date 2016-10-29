@@ -1,23 +1,15 @@
-// module.exports = {
-//   entry: "./app/frontend/app.es6",
-//   output: {
-//     path: "./app/assets/javascripts/",
-//     filename: "app.js"
-//   },
-//   module: {
-//     loaders: [{
-//         test: [/\.es6$/, /\.jsx$/],
-//         exclude: /node_modules/,
-//         loader: 'babel',
-//         query: {
-//             presets: ['es2015', 'react', 'stage-0']
-//         }
-//     }]
-//   }
-// };
-
 var path = require('path');
 var webpack = require('webpack');
+var plugins = [];
+var minimize = process.argv.indexOf('--minimize') !== -1;
+var plugins = [];
+
+if (minimize) {
+  plugins.push(new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      minimize: true
+    }));
+}
 
 module.exports = {
   context: __dirname,
@@ -34,11 +26,7 @@ module.exports = {
     modulesDirectories: [ 'node_modules'],
   },
 
-  plugins: [
-    new webpack.ResolverPlugin([
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.package.json', ['main'])
-    ])
-  ],
+  plugins: plugins,
 
   module: {
     loaders: [

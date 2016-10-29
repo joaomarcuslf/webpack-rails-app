@@ -22,7 +22,8 @@
     "start": "npm install && bundle install && bundle exec rake db:create && bundle exec rake db:migrate",
     "pre-dev": "npm install && bundle install && bundle exec rake db:migrate",
     "dev": "bundle exec foreman start",
-    "bundle": "webpack"
+    "bundle": "webpack",
+    "build": "webpack --minimize"
   },
   "author": "João Marcus Fernandes",
   "license": "MIT"
