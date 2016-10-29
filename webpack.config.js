@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var plugins = [];
 var minimize = process.argv.indexOf('--minimize') !== -1;
 var plugins = [];
 
@@ -29,6 +28,9 @@ module.exports = {
   plugins: plugins,
 
   module: {
+    preLoaders: [
+        { test: [/\.es6$/, /\.jsx$/], exclude: /node_modules/, loader: 'eslint' }
+    ],
     loaders: [
       {
         test: [/\.es6$/, /\.jsx$/],
