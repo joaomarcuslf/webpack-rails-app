@@ -1,9 +1,7 @@
 /* @flow */
 import React from 'react';
-import Header from './Header/Header.jsx';
-import Body from './Body/Body.jsx';
 
-export default class App extends React.Component {
+export default class NewItem extends React.Component {
   constructor() {
     super();
   }
@@ -15,8 +13,7 @@ export default class App extends React.Component {
   render(): ?React$Element<div> {
     return(
       <div>
-        <Header />
-        <Body />
+        <h1>This is NewItem Component</h1>
       </div>
     );
   }
