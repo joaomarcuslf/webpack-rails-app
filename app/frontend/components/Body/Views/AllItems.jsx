@@ -13,16 +13,17 @@ export default class AllItems extends React.Component {
   }
 
   componentDidMount() {
-    const privateThis = this;
+    const privateThis = this; // this problem
+
     fetch('/api/v1/todo_items.json', {
       method: 'GET',
-      mode: 'cors'
+      mode: 'cors' // Same Origin
     }).then((response: object) => {
-       response.text()
-        .then((result: object) => {
-          let jsonResult = JSON.parse(result);
+       // Fetch API will give an response with promise
+       response.json()
+         .then((result: object) => {
           privateThis.setState({
-            items: jsonResult
+            items: result
           });
         });
     }, (error: object) => {
@@ -32,9 +33,7 @@ export default class AllItems extends React.Component {
   }
 
   render(): ?React$Element<div> {
-    let items = this
-      .state
-      .items
+    let items = this.state.items
       .map((item: object): ?React$Element<div> => {
         return(
           <div key={item.id}>

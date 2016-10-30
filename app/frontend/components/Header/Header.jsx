@@ -5,7 +5,11 @@ export default class Header extends React.Component {
     super();
   }
 
-  render() {
+  shouldComponentUpdate(): boolean {
+    return false;
+  }
+
+  render(): ?React$Element<h1> {
     return(
       <h1>This is the header</h1>
     );
