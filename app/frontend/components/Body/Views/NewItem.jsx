@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 import React from 'react';
 
 export default class NewItem extends React.Component {
@@ -20,7 +20,7 @@ export default class NewItem extends React.Component {
     this.setState({ description: event.target.value });
   }
 
-  handleSubmit(event: object) {
+  handleSubmit() {
     fetch('/api/v1/todo_items.json', {
       method: 'POST',
       headers: {
@@ -34,7 +34,7 @@ export default class NewItem extends React.Component {
         }
       })
     })
-      .then((response: object) => {
+      .then(() => {
         this.setState({
           title: '',
           description: '',
@@ -55,8 +55,7 @@ export default class NewItem extends React.Component {
           placeholder="Type a description."
           disabled={this.state.hasNoTitle}
           value={this.state.description}
-          onChange={this.handleDescriptionChange}>
-        </textarea>
+          onChange={this.handleDescriptionChange} />
         <br />
         <button onClick={this.handleSubmit}>
           Submit
