@@ -53,26 +53,40 @@ export default class AllItems extends React.Component {
 	render(): ?React$Element<div> {
 		let title = (this.state.editable) ? <div>
 			<input type="text"
+					className="form-control"
           placeholder="Type a title."
 					value={this.state.title}
           onChange={this.handleTitleChange} />
         <br />
-		</div> : <h3> {this.props.item.title} </h3>;
+		</div> : <h3 className="item-title"> <i className="fa fa-comment-o fa-lg"></i> {this.props.item.title} </h3>;
+
 		let description = this.state.editable ? <div>
-			<textarea
+			<textarea className="form-control"
           placeholder="Type a description."
           disabled={this.state.hasNoTitle}
 					value={this.state.description}
           onChange={this.handleDescriptionChange} />
         <br />
-		</div> : <p> {this.props.item.description} </p>;
+		</div> : <p className="item-paragraph"> <i className="fa fa-quote-left fa-lg"></i> {this.props.item.description} </p>;
+
+		let editIcon = (this.state.editable) ? <i className="fa fa-check fa-lg"></i> : <i className="fa fa-pencil-square-o fa-lg"></i>;
+
     return (
-      <div>
+			<div className="row container item-content">
+				<div className="icons-container">
+					<button className="btn-icon" onClick={this.props.handleDelete}>
+						<i className="fa fa-close fa-lg"></i>
+					</button>
+					<button className="btn-icon" onClick={this.handleEdit}>
+						{editIcon}
+					</button>
+				</div>
 				{ title }
 				{description}
-				<span> {this.formatDate(this.props.item.updated_at)} </span>
-				<button onClick={this.props.handleDelete}>X</button>
-				<button onClick={this.handleEdit}> {this.state.editable ? 'V' : 'E' } </button>
+				<span>
+					<i className="fa fa-calendar fa-lg"></i>
+					{this.formatDate(this.props.item.updated_at)}
+				</span>
 				<hr />
       </div>
     );

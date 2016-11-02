@@ -341,7 +341,6 @@
 	        'div',
 	        { className: 'container' },
 	        _react2.default.createElement(_NewItem2.default, { handleSubmit: this.handleSubmit }),
-	        _react2.default.createElement('hr', null),
 	        _react2.default.createElement(_AllItems2.default, { items: this.state.items,
 	          handleDelete: this.handleDelete,
 	          onUpdate: this.handleUpdate })
@@ -632,7 +631,7 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'itens-container' },
 	        items
 	      );
 	    }
@@ -3583,7 +3582,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -3605,126 +3604,136 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var AllItems = function (_React$Component) {
-			_inherits(AllItems, _React$Component);
+		_inherits(AllItems, _React$Component);
 
-			function AllItems(props) {
-					_classCallCheck(this, AllItems);
+		function AllItems(props) {
+			_classCallCheck(this, AllItems);
 
-					var _this = _possibleConstructorReturn(this, (AllItems.__proto__ || Object.getPrototypeOf(AllItems)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (AllItems.__proto__ || Object.getPrototypeOf(AllItems)).call(this, props));
 
-					var dateFormatter = new _dateFormatter2.default();
-					_this.formatDate = dateFormatter.format;
+			var dateFormatter = new _dateFormatter2.default();
+			_this.formatDate = dateFormatter.format;
 
-					_this.state = {
-							title: _this.props.item.title,
-							description: _this.props.item.description,
-							editable: false,
-							hasNoTitle: false
-					};
-					_this.handleEdit = _this.handleEdit.bind(_this);
-					_this.handleTitleChange = _this.handleTitleChange.bind(_this);
-					_this.handleDescriptionChange = _this.handleDescriptionChange.bind(_this);
-					return _this;
+			_this.state = {
+				title: _this.props.item.title,
+				description: _this.props.item.description,
+				editable: false,
+				hasNoTitle: false
+			};
+			_this.handleEdit = _this.handleEdit.bind(_this);
+			_this.handleTitleChange = _this.handleTitleChange.bind(_this);
+			_this.handleDescriptionChange = _this.handleDescriptionChange.bind(_this);
+			return _this;
+		}
+
+		_createClass(AllItems, [{
+			key: 'shouldComponentUpdate',
+			value: function shouldComponentUpdate() {
+				return true;
 			}
+		}, {
+			key: 'handleTitleChange',
+			value: function handleTitleChange(event) {
+				var title = event.target.value;
+				var hasNoTitle = title.length === 0;
 
-			_createClass(AllItems, [{
-					key: 'shouldComponentUpdate',
-					value: function shouldComponentUpdate() {
-							return true;
-					}
-			}, {
-					key: 'handleTitleChange',
-					value: function handleTitleChange(event) {
-							var title = event.target.value;
-							var hasNoTitle = title.length === 0;
+				this.setState({ title: title, hasNoTitle: hasNoTitle });
+			}
+		}, {
+			key: 'handleDescriptionChange',
+			value: function handleDescriptionChange(event) {
+				this.setState({ description: event.target.value });
+			}
+		}, {
+			key: 'handleEdit',
+			value: function handleEdit() {
+				if (this.state.editable) {
+					// @Todo
+					var item = {
+						title: this.state.title,
+						description: this.state.description
+					};
 
-							this.setState({ title: title, hasNoTitle: hasNoTitle });
-					}
-			}, {
-					key: 'handleDescriptionChange',
-					value: function handleDescriptionChange(event) {
-							this.setState({ description: event.target.value });
-					}
-			}, {
-					key: 'handleEdit',
-					value: function handleEdit() {
-							if (this.state.editable) {
-									// @Todo
-									var item = {
-											title: this.state.title,
-											description: this.state.description
-									};
+					item['id'] = this.props.item.id;
 
-									item['id'] = this.props.item.id;
+					this.props.handleUpdate(item);
+				}
+				this.setState({ editable: !this.state.editable });
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var title = this.state.editable ? _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement('input', { type: 'text',
+						className: 'form-control',
+						placeholder: 'Type a title.',
+						value: this.state.title,
+						onChange: this.handleTitleChange }),
+					_react2.default.createElement('br', null)
+				) : _react2.default.createElement(
+					'h3',
+					{ className: 'item-title' },
+					' ',
+					_react2.default.createElement('i', { className: 'fa fa-comment-o fa-lg' }),
+					' ',
+					this.props.item.title,
+					' '
+				);
 
-									this.props.handleUpdate(item);
-							}
-							this.setState({ editable: !this.state.editable });
-					}
-			}, {
-					key: 'render',
-					value: function render() {
-							var title = this.state.editable ? _react2.default.createElement(
-									'div',
-									null,
-									_react2.default.createElement('input', { type: 'text',
-											placeholder: 'Type a title.',
-											value: this.state.title,
-											onChange: this.handleTitleChange }),
-									_react2.default.createElement('br', null)
-							) : _react2.default.createElement(
-									'h3',
-									null,
-									' ',
-									this.props.item.title,
-									' '
-							);
-							var description = this.state.editable ? _react2.default.createElement(
-									'div',
-									null,
-									_react2.default.createElement('textarea', {
-											placeholder: 'Type a description.',
-											disabled: this.state.hasNoTitle,
-											value: this.state.description,
-											onChange: this.handleDescriptionChange }),
-									_react2.default.createElement('br', null)
-							) : _react2.default.createElement(
-									'p',
-									null,
-									' ',
-									this.props.item.description,
-									' '
-							);
-							return _react2.default.createElement(
-									'div',
-									null,
-									title,
-									description,
-									_react2.default.createElement(
-											'span',
-											null,
-											' ',
-											this.formatDate(this.props.item.updated_at),
-											' '
-									),
-									_react2.default.createElement(
-											'button',
-											{ onClick: this.props.handleDelete },
-											'X'
-									),
-									_react2.default.createElement(
-											'button',
-											{ onClick: this.handleEdit },
-											' ',
-											this.state.editable ? 'V' : 'E',
-											' '
-									),
-									_react2.default.createElement('hr', null)
-							);
-					}
-			}]);
+				var description = this.state.editable ? _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement('textarea', { className: 'form-control',
+						placeholder: 'Type a description.',
+						disabled: this.state.hasNoTitle,
+						value: this.state.description,
+						onChange: this.handleDescriptionChange }),
+					_react2.default.createElement('br', null)
+				) : _react2.default.createElement(
+					'p',
+					{ className: 'item-paragraph' },
+					' ',
+					_react2.default.createElement('i', { className: 'fa fa-quote-left fa-lg' }),
+					' ',
+					this.props.item.description,
+					' '
+				);
 
-			return AllItems;
+				var editIcon = this.state.editable ? _react2.default.createElement('i', { className: 'fa fa-check fa-lg' }) : _react2.default.createElement('i', { className: 'fa fa-pencil-square-o fa-lg' });
+
+				return _react2.default.createElement(
+					'div',
+					{ className: 'row container item-content' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'icons-container' },
+						_react2.default.createElement(
+							'button',
+							{ className: 'btn-icon', onClick: this.props.handleDelete },
+							_react2.default.createElement('i', { className: 'fa fa-close fa-lg' })
+						),
+						_react2.default.createElement(
+							'button',
+							{ className: 'btn-icon', onClick: this.handleEdit },
+							editIcon
+						)
+					),
+					title,
+					description,
+					_react2.default.createElement(
+						'span',
+						null,
+						_react2.default.createElement('i', { className: 'fa fa-calendar fa-lg' }),
+						this.formatDate(this.props.item.updated_at)
+					),
+					_react2.default.createElement('hr', null)
+				);
+			}
+		}]);
+
+		return AllItems;
 	}(_react2.default.Component);
 
 	exports.default = AllItems;
