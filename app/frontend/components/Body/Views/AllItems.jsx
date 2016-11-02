@@ -18,33 +18,34 @@ export default class AllItems extends React.Component {
     fetch('/api/v1/todo_items.json', {
       method: 'GET',
       mode: 'cors' // Same Origin
-    }).then((response: object) => {
-       // Fetch API will give an response with promise
-       response.json()
-         .then((result: object) => {
-          privateThis.setState({
-            items: result
-          });
+    })
+      .then((response: object) => {
+        // Fetch API will give an response with promise
+        return response.json();
+      })
+      .then((result: object) => {
+        privateThis.setState({
+          items: result
         });
-    }, (error: object) => {
-      // handle network error
-      console.error(error);
-    });
+      }, (error: object) => {
+        // handle network error
+        console.error(error);
+      });
   }
 
   render(): ?React$Element<div> {
     let items = this.state.items
-      .map((item: object): ?React$Element<div> => {
-        return(
-          <div key={item.id}>
-            <h3> {item.title} </h3>
-            <p> {item.description} </p>
-            <hr />
-          </div>
-        );
-      });
+      .map((item: object): ?React$Element < div > => {
+      return (
+        <div key={item.id}>
+          <h3> {item.title} </h3>
+          <p> {item.description} </p>
+          <hr />
+        </div>
+      );
+    });
 
-    return(
+    return (
       <div>
         {items}
       </div>
