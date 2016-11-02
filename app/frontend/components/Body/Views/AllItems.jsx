@@ -40,6 +40,7 @@ export default class AllItems extends React.Component {
         <div key={item.id}>
           <h3> {item.title} </h3>
           <p> {item.description} </p>
+          <span> {item.updated_at} </span>
           <hr />
         </div>
       );
