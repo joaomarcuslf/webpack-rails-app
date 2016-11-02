@@ -11,7 +11,7 @@ export default class AllItems extends React.Component {
     this.formatDate = dateFormatter.format;
   }
 
-  handleDelete(id) {
+  handleDelete(id: integer) {
     this.props.handleDelete(id);
   }
 
