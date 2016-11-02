@@ -213,6 +213,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	__webpack_require__(146);
+
 	var _AllItems = __webpack_require__(29);
 
 	var _AllItems2 = _interopRequireDefault(_AllItems);
@@ -235,10 +237,40 @@
 	  function Body() {
 	    _classCallCheck(this, Body);
 
-	    return _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).call(this));
+	    var _this = _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).call(this));
+
+	    _this.state = { items: [] };
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(Body, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var privateThis = this; // this problem
+
+	      fetch('/api/v1/todo_items.json', {
+	        method: 'GET',
+	        mode: 'cors' // Same Origin
+	      }).then(function (response) {
+	        // Fetch API will give an response with promise
+	        return response.json();
+	      }).then(function (result) {
+	        privateThis.setState({
+	          items: result
+	        });
+	      }, function (error) {
+	        // handle network error
+	        console.error(error);
+	      });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(item) {
+	      var newState = this.state.items.concat(item);
+	      this.setState({ items: newState });
+	    }
+	  }, {
 	    key: 'shouldComponentUpdate',
 	    value: function shouldComponentUpdate() {
 	      return true;
@@ -249,9 +281,9 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_NewItem2.default, null),
+	        _react2.default.createElement(_NewItem2.default, { handleSubmit: this.handleSubmit }),
 	        _react2.default.createElement('hr', null),
-	        _react2.default.createElement(_AllItems2.default, null)
+	        _react2.default.createElement(_AllItems2.default, { items: this.state.items })
 	      );
 	    }
 	  }]);
@@ -4427,8 +4459,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(146);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4443,41 +4473,13 @@
 	  function AllItems(props) {
 	    _classCallCheck(this, AllItems);
 
-	    var _this = _possibleConstructorReturn(this, (AllItems.__proto__ || Object.getPrototypeOf(AllItems)).call(this, props));
-
-	    _this.state = { items: [] };
-	    return _this;
+	    return _possibleConstructorReturn(this, (AllItems.__proto__ || Object.getPrototypeOf(AllItems)).call(this, props));
 	  }
 
 	  _createClass(AllItems, [{
-	    key: 'getInitialState',
-	    value: function getInitialState() {
-	      return this.state;
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      var privateThis = this; // this problem
-
-	      fetch('/api/v1/todo_items.json', {
-	        method: 'GET',
-	        mode: 'cors' // Same Origin
-	      }).then(function (response) {
-	        // Fetch API will give an response with promise
-	        return response.json();
-	      }).then(function (result) {
-	        privateThis.setState({
-	          items: result
-	        });
-	      }, function (error) {
-	        // handle network error
-	        console.error(error);
-	      });
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var items = this.state.items.map(function (item) {
+	      var items = this.props.items.map(function (item) {
 	        return _react2.default.createElement(
 	          'div',
 	          { key: item.id },
@@ -4589,7 +4591,10 @@
 	            'description': this.state.description
 	          }
 	        })
-	      }).then(function () {
+	      }).then(function (response) {
+	        return response.json();
+	      }).then(function (response) {
+	        _this2.props.handleSubmit(response);
 	        _this2.setState({
 	          title: '',
 	          description: '',
