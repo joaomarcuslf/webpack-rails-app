@@ -241,6 +241,8 @@
 
 	    _this.state = { items: [] };
 	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    _this.handleDelete = _this.handleDelete.bind(_this);
+	    _this.removeItemClient = _this.removeItemClient.bind(_this);
 	    return _this;
 	  }
 
@@ -265,15 +267,41 @@
 	      });
 	    }
 	  }, {
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate() {
+	      return true;
+	    }
+	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(item) {
 	      var newState = this.state.items.concat(item);
 	      this.setState({ items: newState });
 	    }
 	  }, {
-	    key: 'shouldComponentUpdate',
-	    value: function shouldComponentUpdate() {
-	      return true;
+	    key: 'handleDelete',
+	    value: function handleDelete(id) {
+	      var _this2 = this;
+
+	      fetch('/api/v1/todo_items/' + id, {
+	        method: 'DELETE',
+	        headers: {
+	          'Accept': 'application/json',
+	          'Content-Type': 'application/json'
+	        }
+	      }).then(function (response) {
+	        return response.text();
+	      }).then(function () {
+	        _this2.removeItemClient(id);
+	      });
+	    }
+	  }, {
+	    key: 'removeItemClient',
+	    value: function removeItemClient(id) {
+	      var newItems = this.state.items.filter(function (item) {
+	        return item.id != id;
+	      });
+
+	      this.setState({ items: newItems });
 	    }
 	  }, {
 	    key: 'render',
@@ -283,7 +311,7 @@
 	        null,
 	        _react2.default.createElement(_NewItem2.default, { handleSubmit: this.handleSubmit }),
 	        _react2.default.createElement('hr', null),
-	        _react2.default.createElement(_AllItems2.default, { items: this.state.items })
+	        _react2.default.createElement(_AllItems2.default, { items: this.state.items, handleDelete: this.handleDelete })
 	      );
 	    }
 	  }]);
@@ -4486,6 +4514,11 @@
 	  }
 
 	  _createClass(AllItems, [{
+	    key: 'handleDelete',
+	    value: function handleDelete(id) {
+	      this.props.handleDelete(id);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -4514,6 +4547,11 @@
 	            ' ',
 	            _this2.formatDate(item.updated_at),
 	            ' '
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: _this2.handleDelete.bind(_this2, item.id) },
+	            'X'
 	          ),
 	          _react2.default.createElement('hr', null)
 	        );

@@ -11,6 +11,10 @@ export default class AllItems extends React.Component {
     this.formatDate = dateFormatter.format;
   }
 
+  handleDelete(id) {
+    this.props.handleDelete(id);
+  }
+
   render(): ?React$Element<div> {
     let items = this.props.items
       .map((item: object): ?React$Element<div> => {
@@ -18,7 +22,8 @@ export default class AllItems extends React.Component {
         <div key={item.id}>
           <h3> {item.title} </h3>
           <p> {item.description} </p>
-          <span> { this.formatDate(item.updated_at) } </span>
+          <span> {this.formatDate(item.updated_at)} </span>
+          <button onClick={this.handleDelete.bind(this, item.id)}>X</button>
           <hr />
         </div>
       );
