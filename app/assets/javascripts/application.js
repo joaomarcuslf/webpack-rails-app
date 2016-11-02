@@ -4459,6 +4459,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _dateFormatter = __webpack_require__(178);
+
+	var _dateFormatter2 = _interopRequireDefault(_dateFormatter);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4473,12 +4477,19 @@
 	  function AllItems(props) {
 	    _classCallCheck(this, AllItems);
 
-	    return _possibleConstructorReturn(this, (AllItems.__proto__ || Object.getPrototypeOf(AllItems)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (AllItems.__proto__ || Object.getPrototypeOf(AllItems)).call(this, props));
+
+	    var dateFormatter = new _dateFormatter2.default();
+
+	    _this.formatDate = dateFormatter.format;
+	    return _this;
 	  }
 
 	  _createClass(AllItems, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      var items = this.props.items.map(function (item) {
 	        return _react2.default.createElement(
 	          'div',
@@ -4501,7 +4512,7 @@
 	            'span',
 	            null,
 	            ' ',
-	            item.updated_at,
+	            _this2.formatDate(item.updated_at),
 	            ' '
 	          ),
 	          _react2.default.createElement('hr', null)
@@ -22148,6 +22159,93 @@
 	}
 
 	module.exports = isNode;
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _Formatter = __webpack_require__(179);
+
+	var _Formatter2 = _interopRequireDefault(_Formatter);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DateFormatter = function (_FormatterInterface) {
+		_inherits(DateFormatter, _FormatterInterface);
+
+		function DateFormatter() {
+			var _this, _ret;
+
+			_classCallCheck(this, DateFormatter);
+
+			return _ret = (_this = _possibleConstructorReturn(this, (DateFormatter.__proto__ || Object.getPrototypeOf(DateFormatter)).call(this)), _this), _possibleConstructorReturn(_this, _ret);
+		}
+
+		_createClass(DateFormatter, [{
+			key: 'format',
+			value: function format(data) {
+				var dateToFormat = new Date(data);
+
+				var day = ('0' + dateToFormat.getDate()).slice(-2); // Will get 01 if day is 1
+				var year = dateToFormat.getFullYear();
+				var month = dateToFormat.getMonth();
+
+				var formatedDate = month + '/' + day + '/' + year;
+
+				return formatedDate;
+			}
+		}]);
+
+		return DateFormatter;
+	}(_Formatter2.default);
+
+	exports.default = DateFormatter;
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Formatter = function () {
+		function Formatter() {
+			_classCallCheck(this, Formatter);
+
+			this.format = this.format.bind(this);
+			return this;
+		}
+
+		_createClass(Formatter, [{
+			key: "format",
+			value: function format() {}
+		}]);
+
+		return Formatter;
+	}();
+
+	exports.default = Formatter;
 
 /***/ }
 /******/ ])

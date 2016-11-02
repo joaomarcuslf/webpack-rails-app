@@ -1,9 +1,14 @@
 /* @flow */
 import React from 'react';
+import DateFormatter from '../../../formatters/dateFormatter.es6';
 
 export default class AllItems extends React.Component {
   constructor(props: object) {
     super(props);
+
+    let dateFormatter = new DateFormatter();
+
+    this.formatDate = dateFormatter.format;
   }
 
   render(): ?React$Element<div> {
@@ -13,7 +18,7 @@ export default class AllItems extends React.Component {
         <div key={item.id}>
           <h3> {item.title} </h3>
           <p> {item.description} </p>
-          <span> {item.updated_at} </span>
+          <span> { this.formatDate(item.updated_at) } </span>
           <hr />
         </div>
       );
