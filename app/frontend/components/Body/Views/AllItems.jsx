@@ -1,30 +1,30 @@
 /* @flow */
 import React from 'react';
-import DateFormatter from '../../../formatters/dateFormatter.es6';
+import Item from './Item.jsx';
 
 export default class AllItems extends React.Component {
   constructor(props: object) {
     super(props);
 
-    let dateFormatter = new DateFormatter();
-
-    this.formatDate = dateFormatter.format;
+    this.onUpdate = this.onUpdate.bind(this);
   }
 
   handleDelete(id: integer) {
     this.props.handleDelete(id);
   }
 
+  onUpdate(item: object) {
+    this.props.onUpdate(item);
+  }
+
   render(): ?React$Element<div> {
     let items = this.props.items
-      .map((item: object): ?React$Element<div> => {
+      .map((item: object): ?React$Element < div > => {
       return (
         <div key={item.id}>
-          <h3> {item.title} </h3>
-          <p> {item.description} </p>
-          <span> {this.formatDate(item.updated_at)} </span>
-          <button onClick={this.handleDelete.bind(this, item.id)}>X</button>
-          <hr />
+          <Item item={item}
+                handleDelete={this.handleDelete.bind(this, item.id)}
+                handleUpdate={this.onUpdate} />
         </div>
       );
     });
