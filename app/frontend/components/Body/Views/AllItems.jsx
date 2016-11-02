@@ -19,7 +19,7 @@ export default class AllItems extends React.Component {
 
   render(): ?React$Element<div> {
     let items = this.props.items
-      .map((item: object): ?React$Element < div > => {
+      .map((item: object): ?React$Element<div> => {
       return (
         <div key={item.id}>
           <Item item={item}

@@ -20,6 +20,10 @@ export default class AllItems extends React.Component {
 		this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
 	}
 
+	shouldComponentUpdate(): boolean {
+    return true;
+  }
+
 	handleTitleChange(event: object) {
     let title = event.target.value;
     let hasNoTitle = (title.length === 0);
@@ -46,7 +50,7 @@ export default class AllItems extends React.Component {
 		this.setState({editable: !this.state.editable});
 	}
 
-	render(): ?React$Element < div > {
+	render(): ?React$Element<div> {
 		let title = (this.state.editable) ? <div>
 			<input type="text"
           placeholder="Type a title."
