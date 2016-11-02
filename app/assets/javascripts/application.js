@@ -147,7 +147,7 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -177,17 +177,26 @@
 	  }
 
 	  _createClass(Header, [{
-	    key: 'shouldComponentUpdate',
+	    key: "shouldComponentUpdate",
 	    value: function shouldComponentUpdate() {
 	      return false;
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'h1',
-	        null,
-	        'This is the header'
+	        "div",
+	        { className: "container" },
+	        _react2.default.createElement(
+	          "h1",
+	          { className: "text-center" },
+	          "TODO APP"
+	        ),
+	        _react2.default.createElement(
+	          "p",
+	          { className: "justify-text" },
+	          "This applications was made with React and rails, using a moderm approach, with webpack running on development and bundle the javascript files to Rails."
+	        )
 	      );
 	    }
 	  }]);
