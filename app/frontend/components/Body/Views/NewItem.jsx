@@ -49,20 +49,27 @@ export default class NewItem extends React.Component {
 
   render(): ?React$Element<div> {
     return (
-      <div>
+      <div className="row form-group jumbotron add-form-area">
+        <h2 className="lead">
+          Add a new todo:
+        </h2>
         <input type="text"
+          className="form-control"
           placeholder="Type a title."
           value={this.state.title}
           onChange={this.handleTitleChange} />
-        <br />
         <textarea
+          className="form-control"
           placeholder="Type a description."
           disabled={this.state.hasNoTitle}
           value={this.state.description}
           onChange={this.handleDescriptionChange} />
-        <br />
-        <button onClick={this.handleSubmit}>
-          Submit
+        <button
+          className="btn btn-primary btn-to-right"
+          disabled={this.state.hasNoTitle}
+          onClick={this.handleSubmit}>
+          <span className="add-text">Add new Todo</span>
+          <i className="fa fa-plus fa-lg"></i>
         </button>
       </div>
     );
