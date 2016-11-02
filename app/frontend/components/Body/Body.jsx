@@ -97,7 +97,6 @@ export default class Body extends React.Component {
     return(
       <div className="container">
         <NewItem handleSubmit={this.handleSubmit} />
-        <hr />
         <AllItems items={this.state.items}
                   handleDelete={this.handleDelete}
                   onUpdate={this.handleUpdate} />
