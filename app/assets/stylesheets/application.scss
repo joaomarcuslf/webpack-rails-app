@@ -1,0 +1,20 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+body {
+	background: rgba($color: #d9d9d9, $alpha: .2) !important;
+	color: #313131 !important;
+}
+
+.btn-to-right {
+	float: right;
+}
+
+.add-text {
+	padding: 0 10px;
+}
+
+.add-form-area {
+	background: rgba($color: #eaeaea, $alpha: .3);
+}

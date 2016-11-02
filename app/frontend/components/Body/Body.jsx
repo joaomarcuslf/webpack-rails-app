@@ -80,7 +80,7 @@ export default class Body extends React.Component {
   }
 
   updateItems(item: object) {
-    let items = this.state.items.filter((i) => { return i.id !== item.id });
+    let items = this.state.items.filter((i) => { return i.id !== item.id; });
     items.push(item);
     this.setState({items: items });
   }
@@ -95,7 +95,7 @@ export default class Body extends React.Component {
 
   render(): ?React$Element<div> {
     return(
-      <div>
+      <div className="container">
         <NewItem handleSubmit={this.handleSubmit} />
         <hr />
         <AllItems items={this.state.items}
