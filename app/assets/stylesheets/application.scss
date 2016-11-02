@@ -42,3 +42,46 @@ body {
 .justify-text {
 	text-align: justify;
 }
+
+.menu {
+	position: fixed;
+	z-index: 5;
+  top: 0;
+  right: 0;
+	width: 380px;
+
+	.icons-container {
+		position: relative;
+    z-index: 1;
+
+		.fa-minus-square-o {
+			color: #eaeaea;
+		}
+	}
+
+	.menu-content {
+		color: #eaeaea;
+		padding-left: 10px;
+		padding-top: 10px;
+		height: 0px;
+		transition: height .2s linear;
+		width: 100%;
+	}
+	.open {
+		background: #313131;
+		height: 100%
+	}
+
+	.links-list {
+		padding-bottom: 10px;
+		a {
+			padding-left: 10px;
+			color: #eaeaea;
+			display: list-item;
+			i {
+				padding-right: 5px;
+				color:#df1515;
+			}
+		}
+	}
+}

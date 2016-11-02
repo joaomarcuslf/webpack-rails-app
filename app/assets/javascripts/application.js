@@ -82,6 +82,10 @@
 
 	var _Header2 = _interopRequireDefault(_Header);
 
+	var _Menu = __webpack_require__(181);
+
+	var _Menu2 = _interopRequireDefault(_Menu);
+
 	var _Body = __webpack_require__(5);
 
 	var _Body2 = _interopRequireDefault(_Body);
@@ -114,6 +118,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(_Menu2.default, null),
 	        _react2.default.createElement(_Header2.default, null),
 	        _react2.default.createElement(_Body2.default, null)
 	      );
@@ -186,15 +191,15 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "container" },
+	        { className: "container text-center" },
 	        _react2.default.createElement(
 	          "h1",
-	          { className: "text-center" },
+	          null,
 	          "TODO APP"
 	        ),
 	        _react2.default.createElement(
 	          "p",
-	          { className: "justify-text" },
+	          null,
 	          "This applications was made with React and rails, using a moderm approach, with webpack running on development and bundle the javascript files to Rails."
 	        )
 	      );
@@ -22480,6 +22485,133 @@
 	}
 
 	module.exports = isNode;
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Header = function (_React$Component) {
+		_inherits(Header, _React$Component);
+
+		function Header() {
+			_classCallCheck(this, Header);
+
+			var _this = _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).call(this));
+
+			_this.state = {
+				isOpen: false
+			};
+
+			_this.handleClick = _this.handleClick.bind(_this);
+			return _this;
+		}
+
+		_createClass(Header, [{
+			key: "shouldComponentUpdate",
+			value: function shouldComponentUpdate() {
+				return true;
+			}
+		}, {
+			key: "handleClick",
+			value: function handleClick() {
+				this.setState({ isOpen: !this.state.isOpen });
+			}
+		}, {
+			key: "render",
+			value: function render() {
+				var menuBtn = this.state.isOpen ? _react2.default.createElement("i", { className: "fa fa-minus-square-o fa-3x" }) : _react2.default.createElement("i", { className: "fa fa-plus-square-o fa-3x" });
+
+				var menuContent = !this.state.isOpen ? _react2.default.createElement("div", { className: "menu-content" }) : _react2.default.createElement(
+					"div",
+					{ className: "menu-content open" },
+					_react2.default.createElement(
+						"h2",
+						null,
+						"Find me:"
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "links-list" },
+						_react2.default.createElement(
+							"a",
+							{ target: "_new", href: "http://joaomarcuslf.github.io/" },
+							_react2.default.createElement("i", { className: "fa fa-terminal fa-lg" }),
+							" @joaomarcuslf"
+						),
+						_react2.default.createElement(
+							"a",
+							{ target: "_new", href: "https://github.com/joaomarcuslf/" },
+							_react2.default.createElement("i", { className: "fa fa-github-square fa-lg" }),
+							" Github"
+						),
+						_react2.default.createElement(
+							"a",
+							{ target: "_new", href: "https://www.facebook.com/joaomarcus.l.fernandes/" },
+							_react2.default.createElement("i", { className: "fa fa-facebook-square fa-lg" }),
+							" Facebook"
+						),
+						_react2.default.createElement(
+							"a",
+							{ target: "_new", href: "https://twitter.com/joaomarcuslf/" },
+							_react2.default.createElement("i", { className: "fa fa-twitter-square  fa-lg" }),
+							" Twitter"
+						),
+						_react2.default.createElement(
+							"a",
+							{ target: "_new", href: "https://medium.com/@joaomarcuslf/" },
+							_react2.default.createElement("i", { className: "fa fa-medium fa-lg" }),
+							" Medium"
+						),
+						_react2.default.createElement(
+							"a",
+							{ target: "_new", href: "https://www.linkedin.com/in/joaomarcuslf/" },
+							_react2.default.createElement("i", { className: "fa fa-linkedin-square  fa-lg" }),
+							" LinkeIn"
+						)
+					)
+				);
+
+				return _react2.default.createElement(
+					"div",
+					{ className: "menu container-fluid" },
+					_react2.default.createElement(
+						"div",
+						{ className: "icons-container" },
+						_react2.default.createElement(
+							"button",
+							{ className: "btn-icon", onClick: this.handleClick },
+							menuBtn
+						)
+					),
+					menuContent
+				);
+			}
+		}]);
+
+		return Header;
+	}(_react2.default.Component);
+
+	exports.default = Header;
 
 /***/ }
 /******/ ])

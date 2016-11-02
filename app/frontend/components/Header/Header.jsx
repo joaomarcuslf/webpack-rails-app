@@ -11,11 +11,11 @@ export default class Header extends React.Component {
 
   render(): ?React$Element<h1> {
     return (
-      <div className="container">
-        <h1 className="text-center">
+      <div className="container text-center">
+        <h1>
           TODO APP
         </h1>
-        <p className="justify-text">
+        <p>
           This applications was made with React and rails, using a moderm approach, with webpack running on development and bundle the javascript files to Rails.
         </p>
       </div>
