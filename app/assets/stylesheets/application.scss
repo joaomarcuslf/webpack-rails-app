@@ -18,3 +18,23 @@ body {
 .add-form-area {
 	background: rgba($color: #eaeaea, $alpha: .3);
 }
+
+.btn-icon {
+	border: none;
+	background: transparent;
+}
+
+.icons-container {
+	float: right;
+}
+
+.item-content {
+	.item-title {
+		padding-bottom: 5px;
+	}
+  .item-paragraph {
+		font-family: serif;
+		font-size: medium;
+		padding-bottom: 15px;
+	}
+}

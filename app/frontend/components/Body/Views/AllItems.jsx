@@ -30,7 +30,7 @@ export default class AllItems extends React.Component {
     });
 
     return (
-      <div>
+      <div className="itens-container">
         {items}
       </div>
     );
