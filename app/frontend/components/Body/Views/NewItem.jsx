@@ -34,7 +34,11 @@ export default class NewItem extends React.Component {
         }
       })
     })
-      .then(() => {
+      .then((response: object): object => {
+        return response.json();
+      })
+      .then((response: object) => {
+        this.props.handleSubmit(response);
         this.setState({
           title: '',
           description: '',
