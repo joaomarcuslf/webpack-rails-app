@@ -8,6 +8,8 @@ export default class Body extends React.Component {
     super();
     this.state = { items: [] };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.removeItemClient = this.removeItemClient.bind(this);
   }
 
   componentDidMount() {
@@ -31,13 +33,37 @@ export default class Body extends React.Component {
       });
   }
 
+  shouldComponentUpdate(): boolean {
+    return true;
+  }
+
   handleSubmit(item: object) {
     let newState = this.state.items.concat(item);
     this.setState({ items: newState });
   }
 
-  shouldComponentUpdate(): boolean {
-    return true;
+  handleDelete(id: integer) {
+    fetch(`/api/v1/todo_items/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response: object): object => {
+        return response.text();
+      })
+      .then(() => {
+        this.removeItemClient(id);
+      });
+  }
+
+  removeItemClient(id) {
+    let newItems = this.state.items.filter((item) => {
+      return item.id != id;
+    });
+
+    this.setState({ items: newItems });
   }
 
   render(): ?React$Element<div> {
@@ -45,7 +71,7 @@ export default class Body extends React.Component {
       <div>
         <NewItem handleSubmit={this.handleSubmit} />
         <hr />
-        <AllItems items={this.state.items} />
+        <AllItems items={this.state.items} handleDelete={this.handleDelete} />
       </div>
     );
   }
