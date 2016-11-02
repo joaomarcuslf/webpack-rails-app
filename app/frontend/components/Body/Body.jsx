@@ -9,6 +9,8 @@ export default class Body extends React.Component {
     this.state = { items: [] };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.updateItems = this.updateItems.bind(this);
     this.removeItemClient = this.removeItemClient.bind(this);
   }
 
@@ -58,7 +60,32 @@ export default class Body extends React.Component {
       });
   }
 
-  removeItemClient(id) {
+  handleUpdate(item: object) {
+    fetch(`/api/v1/todo_items/${item.id}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'todo_item': item
+      })
+    })
+      .then((response: object): object => {
+        return response.json();
+      })
+      .then((response: object) => {
+        this.updateItems(response);
+      });
+  }
+
+  updateItems(item: object) {
+    let items = this.state.items.filter((i) => { return i.id !== item.id });
+    items.push(item);
+    this.setState({items: items });
+  }
+
+  removeItemClient(id: integer) {
     let newItems = this.state.items.filter((item) => {
       return item.id != id;
     });
@@ -71,7 +98,9 @@ export default class Body extends React.Component {
       <div>
         <NewItem handleSubmit={this.handleSubmit} />
         <hr />
-        <AllItems items={this.state.items} handleDelete={this.handleDelete} />
+        <AllItems items={this.state.items}
+                  handleDelete={this.handleDelete}
+                  onUpdate={this.handleUpdate} />
       </div>
     );
   }
