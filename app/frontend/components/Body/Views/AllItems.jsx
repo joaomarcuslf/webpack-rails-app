@@ -19,7 +19,7 @@ export default class AllItems extends React.Component {
       method: 'GET',
       mode: 'cors' // Same Origin
     })
-      .then((response: object) => {
+      .then((response: object): object => {
         // Fetch API will give an response with promise
         return response.json();
       })
@@ -35,7 +35,7 @@ export default class AllItems extends React.Component {
 
   render(): ?React$Element<div> {
     let items = this.state.items
-      .map((item: object): ?React$Element < div > => {
+      .map((item: object): ?React$Element<div> => {
       return (
         <div key={item.id}>
           <h3> {item.title} </h3>
