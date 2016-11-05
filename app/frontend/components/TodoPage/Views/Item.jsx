@@ -58,7 +58,8 @@ export default class AllItems extends React.Component {
 					value={this.state.title}
           onChange={this.handleTitleChange} />
         <br />
-		</div> : <h3 className="item-title"> <i className="fa fa-comment-o fa-lg"></i> {this.props.item.title} </h3>;
+		</div> :
+    <h3 className="item-title"> <i className="fa fa-comment-o fa-lg" /> {this.props.item.title} </h3>;
 
 		let description = this.state.editable ? <div>
 			<textarea className="form-control"
@@ -67,15 +68,18 @@ export default class AllItems extends React.Component {
 					value={this.state.description}
           onChange={this.handleDescriptionChange} />
         <br />
-		</div> : <p className="item-paragraph"> <i className="fa fa-quote-left fa-lg"></i> {this.props.item.description} </p>;
+		</div> :
+    <p className="item-paragraph"> <i className="fa fa-quote-left fa-lg" /> {this.props.item.description} </p>;
 
-		let editIcon = (this.state.editable) ? <i className="fa fa-check fa-lg"></i> : <i className="fa fa-pencil-square-o fa-lg"></i>;
+		let editIcon = (this.state.editable) ?
+    <i className="fa fa-check fa-lg" /> :
+    <i className="fa fa-pencil-square-o fa-lg" />;
 
     return (
 			<div className="row container item-content">
 				<div className="icons-container">
 					<button className="btn-icon" onClick={this.props.handleDelete}>
-						<i className="fa fa-close fa-lg"></i>
+						<i className="fa fa-close fa-lg" />
 					</button>
 					<button className="btn-icon" onClick={this.handleEdit}>
 						{editIcon}
@@ -84,7 +88,7 @@ export default class AllItems extends React.Component {
 				{ title }
 				{description}
 				<span>
-					<i className="fa fa-calendar fa-lg"></i>
+					<i className="fa fa-calendar fa-lg" />
 					{this.formatDate(this.props.item.updated_at)}
 				</span>
 				<hr />
