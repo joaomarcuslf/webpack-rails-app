@@ -3,7 +3,7 @@ import 'whatwg-fetch';
 import AllItems from './Views/AllItems.jsx';
 import NewItem from './Views/NewItem.jsx';
 
-export default class Body extends React.Component {
+export default class TodoPage extends React.Component {
   constructor() {
     super();
     this.state = { items: [] };
