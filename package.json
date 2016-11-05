@@ -1,7 +1,7 @@
 {
   "name": "todo-app",
-  "version": "0.0.0",
-  "description": "",
+  "version": "2.3.0",
+  "description": "##Setting up: - bundle install - npm install - npm install -g webpack - bundle exec rake db:create - bundle exec rake db:migrate - bundle exec foreman start",
   "main": "app/assets/frontend/app.js",
   "dependencies": {
     "flux": "^3.1.0",
@@ -38,5 +38,20 @@
     "build": "webpack --minimize"
   },
   "author": "João Marcus Fernandes",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaomarcuslf/webpack-rails-app.git"
+  },
+  "keywords": [
+    "react",
+    "webpack",
+    "rails",
+    "ecma6",
+    "ecmascript2015"
+  ],
+  "bugs": {
+    "url": "https://github.com/joaomarcuslf/webpack-rails-app/issues"
+  },
+  "homepage": "https://github.com/joaomarcuslf/webpack-rails-app#readme"
 }
