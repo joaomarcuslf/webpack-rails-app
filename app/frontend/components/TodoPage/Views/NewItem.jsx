@@ -1,50 +1,45 @@
 /* @flow weak */
 import React from 'react';
 
+import NewItemActions from '../../../actions/NewItemActions.es6';
+import NewItemStore from '../../../stores/NewItemStore.es6';
+
 export default class NewItem extends React.Component {
   constructor(props: object) {
     super(props);
-    this.state = { title: '', description: '', hasNoTitle: true };
+
+    this.state = NewItemStore.getItemState();
+
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentWillMount() {
+    NewItemStore.on('change', () => {
+      this.setState(NewItemStore.getItemState());
+    });
+  }
+
   handleTitleChange(event: object) {
     let title = event.target.value;
-    let hasNoTitle = (title.length === 0);
 
-    this.setState({ title: title, hasNoTitle: hasNoTitle });
+    NewItemActions.handleTitleChange(title);
   }
 
   handleDescriptionChange(event: object) {
-    this.setState({ description: event.target.value });
+    let description = event.target.value;
+
+    NewItemActions.handleDescriptionChange(description);
   }
 
   handleSubmit() {
-    fetch('/api/v1/todo_items.json', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'todo_item': {
-          'title': this.state.title,
-          'description': this.state.description
-        }
-      })
-    })
-      .then((response: object): object => {
-        return response.json();
-      })
-      .then((response: object) => {
-        this.props.handleSubmit(response);
-        this.setState({
-          title: '',
-          description: '',
-          hasNoTitle: true
-        });
-      });
+    let todoItem = {
+      title: this.state.title,
+      description: this.state.description
+    };
+
+    NewItemActions.addItem(todoItem, this.props.handleSubmit);
   }
 
   render(): ?React$Element<div> {
@@ -69,7 +64,7 @@ export default class NewItem extends React.Component {
           disabled={this.state.hasNoTitle}
           onClick={this.handleSubmit}>
           <span className="add-text">Add new Todo</span>
-          <i className="fa fa-plus fa-lg"></i>
+          <i className="fa fa-plus fa-lg" />
         </button>
       </div>
     );
