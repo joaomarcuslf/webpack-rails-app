@@ -1,26 +1,37 @@
 import React from 'react';
+import MenuStore from '../../stores/MenuStore.es6';
+import MenuActions from '../../actions/MenuActions.es6';
 
 export default class Header extends React.Component {
   constructor() {
 		super();
 
 		this.state = {
-			isOpen: false
+			isOpen: MenuStore.getMenuState()
 		};
 
 		this.handleClick = this.handleClick.bind(this);
   }
 
+  componentWillMount() {
+    MenuStore.on('change', () => {
+      this.setState({
+        isOpen: MenuStore.getMenuState()
+      });
+    });
+  }
+
   shouldComponentUpdate(): boolean {
     return true;
-	}
+  }
 
 	handleClick() {
-		this.setState({ isOpen: !this.state.isOpen });
+		MenuActions.clickMenu();
 	}
 
 	render(): ?React$Element<h1> {
-		let menuBtn = (this.state.isOpen) ? <i className="fa fa-minus-square-o fa-3x" /> : <i className="fa fa-plus-square-o fa-3x" />;
+		let menuBtn = (this.state.isOpen) ?
+      <i className="fa fa-minus-square-o fa-3x" /> : <i className="fa fa-plus-square-o fa-3x" />;
 
 		let menuContent = (!this.state.isOpen) ? <div className="menu-content" /> : <div className="menu-content open">
 			<h2>
