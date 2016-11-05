@@ -1,12 +1,12 @@
 /* @flow */
 import dispatcher from '../dispatchers/dispatcher.es6';
 
-function _clickMenu() {
+function clickMenu() {
   dispatcher.dispatch({
     type: 'CLICK_MENU'
   });
 }
 
 export default {
-  clickMenu: _clickMenu
+  clickMenu: clickMenu
 };
