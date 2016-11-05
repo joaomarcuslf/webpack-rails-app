@@ -2,9 +2,13 @@
 import React from 'react';
 import Header from './Header/Header.jsx';
 import Menu from './Menu/Menu.jsx';
-import Body from './Body/Body.jsx';
+
 
 export default class App extends React.Component {
+  propTypes: {
+    children: React.PropTypes.element.isRequired
+  }
+  
   constructor() {
     super();
   }
@@ -18,7 +22,8 @@ export default class App extends React.Component {
       <div>
         <Menu />
         <Header />
-        <Body />
+
+        {this.props.children}
       </div>
     );
   }
