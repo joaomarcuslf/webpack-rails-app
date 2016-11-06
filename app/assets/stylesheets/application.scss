@@ -1,87 +1,105 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "font-awesome";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'font-awesome';
+
+$font-color: #eaeaea;
 
 body {
-	background: rgba($color: #d9d9d9, $alpha: .2) !important;
-	color: #313131 !important;
+  color: $body-color !important;
+  background: rgba(217, 217, 217, .2) !important;
+
+  $body-color: #313131;
 }
 
 .btn-to-right {
-	float: right;
+  float: right;
 }
 
 .add-text {
-	padding: 0 10px;
+  padding: 0 10px;
 }
 
 .add-form-area {
-	background: rgba($color: #eaeaea, $alpha: .3);
+  background: rgba(235, 235, 235, .3);
 }
 
 .btn-icon {
-	border: none;
-	background: transparent;
+  border: 0;
+  background: transparent;
 }
 
 .icons-container {
-	float: right;
+  float: right;
 }
 
 .item-content {
-	.item-title {
-		padding-bottom: 5px;
-	}
+  .item-title {
+    padding-bottom: 5px;
+  }
+
   .item-paragraph {
-		font-family: serif;
-		font-size: medium;
-		padding-bottom: 15px;
-	}
+    padding-bottom: 15px;
+
+    font-family: serif;
+    font-size: medium;
+  }
 }
 
 .justify-text {
-	text-align: justify;
+  text-align: justify;
 }
 
 .menu {
-	position: fixed;
-	z-index: 5;
+  position: fixed;
+  z-index: 5;
   top: 0;
   right: 0;
-	width: 380px;
 
-	.icons-container {
-		position: relative;
+  max-width: 380px;
+
+  .icons-container {
+    position: relative;
     z-index: 1;
 
-		.fa-minus-square-o {
-			color: #eaeaea;
-		}
-	}
+    .fa-minus-square-o {
+      color: $font-color;
+    }
+  }
 
-	.menu-content {
-		color: #eaeaea;
-		padding-left: 10px;
-		padding-top: 10px;
-		height: 0px;
-		transition: height .2s linear;
-		width: 100%;
-	}
-	.open {
-		background: #313131;
-		height: 100%
-	}
+  .menu-content {
+    width: 100%;
+    height: 0;
+    padding-top: 10px;
+    padding-left: 10px;
 
-	.links-list {
-		padding-bottom: 10px;
-		a {
-			padding-left: 10px;
-			color: #eaeaea;
-			display: list-item;
-			i {
-				padding-right: 5px;
-				color:#df1515;
-			}
-		}
-	}
+    transition: height .2s linear;
+
+    color: $font-color;
+  }
+  .open {
+    width: 380px;
+    height: 100%;
+
+    background: $bg-color;
+
+    $bg-color: #313131;
+  }
+
+  .links-list {
+    padding-bottom: 10px;
+    a {
+      display: list-item;
+
+      padding-left: 10px;
+
+      color: $font-color;
+      i {
+        padding-right: 5px;
+
+        color: $icon-color;
+
+        $icon-color: #df1515;
+      }
+    }
+  }
 }
