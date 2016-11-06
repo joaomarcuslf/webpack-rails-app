@@ -1,5 +1,4 @@
 import React from 'react';
-import 'whatwg-fetch';
 import AllItems from './Views/AllItems.jsx';
 import NewItem from './Views/NewItem.jsx';
 
@@ -17,12 +16,20 @@ export default class TodoPage extends React.Component {
 
   componentWillMount() {
     TodoPageStore.on('change', () => {
-      this.setState({ items: TodoPageStore.getAllTodos() });
+      this.getTodos();
     });
   }
 
   shouldComponentUpdate(): boolean {
     return true;
+  }
+
+  componentWillUnmount() {
+    TodoPageStore.removeListener('change', this.getTodos);
+  }
+
+  getTodos() {
+    this.setState({ items: TodoPageStore.getAllTodos() });
   }
 
   handleSubmit(item: object) {
