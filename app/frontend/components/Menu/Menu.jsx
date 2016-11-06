@@ -15,14 +15,20 @@ export default class Header extends React.Component {
 
   componentWillMount() {
     MenuStore.on('change', () => {
-      this.setState({
-        isOpen: MenuStore.getMenuState()
-      });
+      this.getStates();
     });
   }
 
   shouldComponentUpdate(): boolean {
     return true;
+  }
+
+  componentWillUnmount() {
+    MenuStore.removeListener('change', this.getStates);
+  }
+
+  getStates() {
+    this.setState({isOpen: MenuStore.getMenuState()});
   }
 
 	handleClick() {

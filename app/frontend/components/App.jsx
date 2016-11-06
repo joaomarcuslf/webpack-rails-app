@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react';
+import 'whatwg-fetch';
 import Header from './Header/Header.jsx';
 import Menu from './Menu/Menu.jsx';
 
@@ -8,7 +9,7 @@ export default class App extends React.Component {
   propTypes: {
     children: React.PropTypes.element.isRequired
   }
-  
+
   constructor() {
     super();
   }

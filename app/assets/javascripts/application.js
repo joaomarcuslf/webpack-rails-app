@@ -92,6 +92,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	__webpack_require__(11);
+
 	var _Header = __webpack_require__(9);
 
 	var _Header2 = _interopRequireDefault(_Header);
@@ -156,8 +158,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(11);
-
 	var _AllItems = __webpack_require__(5);
 
 	var _AllItems2 = _interopRequireDefault(_AllItems);
@@ -203,13 +203,23 @@
 	      var _this2 = this;
 
 	      _TodoPageStore2.default.on('change', function () {
-	        _this2.setState({ items: _TodoPageStore2.default.getAllTodos() });
+	        _this2.getTodos();
 	      });
 	    }
 	  }, {
 	    key: 'shouldComponentUpdate',
 	    value: function shouldComponentUpdate() {
 	      return true;
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      _TodoPageStore2.default.removeListener('change', this.getTodos);
+	    }
+	  }, {
+	    key: 'getTodos',
+	    value: function getTodos() {
+	      this.setState({ items: _TodoPageStore2.default.getAllTodos() });
 	    }
 	  }, {
 	    key: 'handleSubmit',
@@ -396,8 +406,18 @@
 	      var _this2 = this;
 
 	      _NewItemStore2.default.on('change', function () {
-	        _this2.setState(_NewItemStore2.default.getItemState());
+	        _this2.getStates();
 	      });
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      _NewItemStore2.default.removeListener('change', this.getStates);
+	    }
+	  }, {
+	    key: 'getStates',
+	    value: function getStates() {
+	      this.setState(_NewItemStore2.default.getItemState());
 	    }
 	  }, {
 	    key: 'handleTitleChange',
@@ -772,15 +792,23 @@
 				var _this2 = this;
 
 				_MenuStore2.default.on('change', function () {
-					_this2.setState({
-						isOpen: _MenuStore2.default.getMenuState()
-					});
+					_this2.getStates();
 				});
 			}
 		}, {
 			key: 'shouldComponentUpdate',
 			value: function shouldComponentUpdate() {
 				return true;
+			}
+		}, {
+			key: 'componentWillUnmount',
+			value: function componentWillUnmount() {
+				_MenuStore2.default.removeListener('change', this.getStates);
+			}
+		}, {
+			key: 'getStates',
+			value: function getStates() {
+				this.setState({ isOpen: _MenuStore2.default.getMenuState() });
 			}
 		}, {
 			key: 'handleClick',
