@@ -17,8 +17,16 @@ export default class NewItem extends React.Component {
 
   componentWillMount() {
     NewItemStore.on('change', () => {
-      this.setState(NewItemStore.getItemState());
+      this.getStates();
     });
+  }
+
+  componentWillUnmount() {
+    NewItemStore.removeListener('change', this.getStates);
+  }
+
+  getStates() {
+    this.setState(NewItemStore.getItemState());
   }
 
   handleTitleChange(event: object) {
